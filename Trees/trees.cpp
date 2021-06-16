@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 
 template <typename T>
@@ -14,15 +15,42 @@ struct Node
     }
 };
 
+Node<int> *takeInputLevelWise()
+{
+    int rootData;
+    cout << "Enter data" << endl;
+    cin >> rootData;
+    Node<int> *root = new Node<int>(rootData);
+    queue<Node<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        int num;
+        Node<int> *front = q.front();
+        q.pop();
+        cout << "Enter number of children of  " << front->data << " : ";
+        cin >> num;
+        for (int i = 0; i < num; i++)
+        {
+            int childData;
+            cin >> childData;
+            Node<int> *child = new Node<int>(childData);
+            front->children.push_back(child);
+            q.push(child);
+        }
+    }
+    return root;
+}
+
 Node<int> *takeInput()
 {
     int rootData;
-    cout << "Enter Data" << endl;
+    cout << "Enter data" << endl;
     cin >> rootData;
     Node<int> *root = new Node<int>(rootData);
 
     int n;
-    cout << "Enter Number of Children of " << rootData << endl;
+    cout << "Enter no. of children of " << rootData << endl;
     cin >> n;
     for (int i = 0; i < n; i++)
     {
@@ -46,6 +74,23 @@ void printTree(Node<int> *root)
     }
 }
 
+void printLevelWise(Node<int> *root)
+{
+    queue<Node<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        cout << q.front()->data << " : ";
+        for (int i = 0; i < q.front()->children.size(); i++)
+        {
+            cout << q.front()->children[i]->data << ", ";
+            q.push(q.front()->children[i]);
+        }
+        cout << endl;
+        q.pop();
+    }
+}
+
 int main()
 {
     // Node<int> *root = new Node<int>(1);
@@ -54,6 +99,7 @@ int main()
     // root->children.push_back(node1);
     // root->children.push_back(node2);
     // printTree(root);
-    Node<int> *root = takeInput();
-    printTree(root);
+    // Node<int> *root = takeInput();
+    Node<int> *root = takeInputLevelWise();
+    printLevelWise(root);
 }

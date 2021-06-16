@@ -116,6 +116,37 @@ int height(Node<int> *root)
     return *max_element(heights.begin(), heights.end()) + 1;
 }
 
+void printAtLevelK(Node<int> *root, int k)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (k == 0)
+    {
+        cout << root->data << " ";
+        return;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        printAtLevelK(root->children[i], k - 1);
+    }
+}
+
+int countLeaves(Node<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    if (root->children.size() == 0)
+        return 1;
+    int sum = 0;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        sum += countLeaves(root->children[i]);
+    }
+    return sum;
+}
+
 int main()
 {
     // Node<int> *root = new Node<int>(1);
@@ -126,7 +157,10 @@ int main()
     // printTree(root);
     // Node<int> *root = takeInput();
     Node<int> *root = takeInputLevelWise();
+    printAtLevelK(root, 2);
+    cout << endl;
     cout << "Count = " << countNode(root) << endl;
     cout << "Height = " << height(root) << endl;
+    cout << "Leaves = " << countLeaves(root) << endl;
     printLevelWise(root);
 }

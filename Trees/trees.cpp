@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
 using namespace std;
 
 template <typename T>
@@ -91,6 +92,30 @@ void printLevelWise(Node<int> *root)
     }
 }
 
+int countNode(Node<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    int sum = 0;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        sum += countNode(root->children[i]);
+    }
+    return sum + 1;
+}
+
+int height(Node<int> *root)
+{
+    if (root->children.size() == 0)
+        return 1;
+    vector<int> heights;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        heights.push_back(height(root->children[i]));
+    }
+    return *max_element(heights.begin(), heights.end()) + 1;
+}
+
 int main()
 {
     // Node<int> *root = new Node<int>(1);
@@ -101,5 +126,7 @@ int main()
     // printTree(root);
     // Node<int> *root = takeInput();
     Node<int> *root = takeInputLevelWise();
+    cout << "Count = " << countNode(root) << endl;
+    cout << "Height = " << height(root) << endl;
     printLevelWise(root);
 }

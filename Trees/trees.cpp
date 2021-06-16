@@ -14,6 +14,16 @@ struct Node
     {
         this->data = data;
     }
+
+    // We can make the below destructor to automatically
+    // delete the entire tree if we execute `delete root;`
+    // ~Node(T data)
+    // {
+    //     for (int i = 0; i < children.size(); i++)
+    //     {
+    //         delete children[i];
+    //     }
+    // }
 };
 
 Node<int> *takeInputLevelWise()
@@ -147,6 +157,51 @@ int countLeaves(Node<int> *root)
     return sum;
 }
 
+void preorder(Node<int> *root)
+{
+    if (root == NULL)
+        return;
+    cout << root->data << endl;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        preorder(root->children[i]);
+    }
+}
+
+// void inorder(Node<int> *root)
+// {
+//     if (root == NULL)
+//         return;
+//     for (int i = 0; i < root->children.size() - 1; i++)
+//     {
+//         inorder(root->children[i]);
+//     }
+//     cout << root->data << endl;
+//     inorder(root->children[root->children.size() - 1]);
+// }
+
+void postorder(Node<int> *root)
+{
+    if (root == NULL)
+        return;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        postorder(root->children[i]);
+    }
+    cout << root->data << endl;
+}
+
+void deleteTree(Node<int> *root)
+{
+    if (root == NULL)
+        return;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        deleteTree(root->children[i]);
+    }
+    delete root;
+}
+
 int main()
 {
     // Node<int> *root = new Node<int>(1);
@@ -162,5 +217,13 @@ int main()
     cout << "Count = " << countNode(root) << endl;
     cout << "Height = " << height(root) << endl;
     cout << "Leaves = " << countLeaves(root) << endl;
+    preorder(root);
+    cout << endl;
+    // inorder(root);
+    // cout << endl;
+    postorder(root);
+    cout << endl;
     printLevelWise(root);
 }
+
+// 1 3 2 3 4 2 5 6 2 7 8 0 0 0 0 1 9 0

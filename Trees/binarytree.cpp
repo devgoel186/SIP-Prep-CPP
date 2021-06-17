@@ -198,6 +198,8 @@ int height(Node<int> *root)
 }
 
 // Diameter of a binary tree is the maximum distance between two nodes
+// Efficiency = O(n*h) [this is because we are fetching heights multiple times,
+// one time in diameter and one in height]
 int diameter(Node<int> *root)
 {
     if (root == NULL)
@@ -206,6 +208,7 @@ int diameter(Node<int> *root)
     return max({diameter(root->left), diameter(root->right), diam});
 }
 
+// Efficiency = O(n)
 pair<int, int> diameterHeight(Node<int> *root)
 {
     if (root == NULL)

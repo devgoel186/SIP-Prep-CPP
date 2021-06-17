@@ -1,5 +1,8 @@
 #include <iostream>
 #include <queue>
+#include <time.h>
+#include <algorithm>
+#include <iomanip>
 using namespace std;
 
 template <typename T>
@@ -96,6 +99,29 @@ void printTree(Node<int> *root)
     printTree(root->right);
 }
 
+void printTreeLevelWise(Node<int> *root)
+{
+    queue<Node<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        Node<int> *front = q.front();
+        q.pop();
+        cout << front->data << " : ";
+        if (front->left != NULL)
+        {
+            q.push(front->left);
+            cout << "L" << front->left->data << " ";
+        }
+        if (front->right != NULL)
+        {
+            q.push(front->right);
+            cout << "R" << front->right->data << " ";
+        }
+        cout << endl;
+    }
+}
+
 int countNode(Node<int> *root)
 {
     if (root == NULL)
@@ -119,6 +145,15 @@ void inorder(Node<int> *root)
     preorder(root->left);
     cout << root->data << " ";
     preorder(root->right);
+}
+
+void postorder(Node<int> *root)
+{
+    if (root == NULL)
+        return;
+    preorder(root->left);
+    preorder(root->right);
+    cout << root->data << " ";
 }
 
 Node<int> *buildTreeHelper(int *in, int *pre, int inS, int inE, int preS, int preE)
@@ -155,13 +190,33 @@ Node<int> *buildTree(int *in, int *pre, int size)
     return buildTreeHelper(in, pre, 0, size - 1, 0, size - 1); // inorder, preorder, inS, inE, preS, preE
 }
 
-void postorder(Node<int> *root)
+int height(Node<int> *root)
 {
     if (root == NULL)
-        return;
-    preorder(root->left);
-    preorder(root->right);
-    cout << root->data << " ";
+        return 0;
+    return max(height(root->left), height(root->right)) + 1;
+}
+
+// Diameter of a binary tree is the maximum distance between two nodes
+int diameter(Node<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    int diam = height(root->left) + height(root->right);
+    return max({diameter(root->left), diameter(root->right), diam});
+}
+
+pair<int, int> diameterHeight(Node<int> *root)
+{
+    if (root == NULL)
+    {
+        return pair<int, int>(0, 0);
+    }
+    pair<int, int> leftAns = diameterHeight(root->left);
+    pair<int, int> rightAns = diameterHeight(root->right);
+    pair<int, int> finalAns;
+    finalAns = make_pair(max({leftAns.first, rightAns.first, (leftAns.second + rightAns.second)}), max(leftAns.second, rightAns.second) + 1);
+    return finalAns;
 }
 
 int main()
@@ -171,8 +226,32 @@ int main()
     int in[] = {4, 2, 5, 1, 8, 6, 9, 3, 7};
     int pre[] = {1, 2, 4, 5, 3, 6, 8, 9, 7};
     Node<int> *root = buildTree(in, pre, 9);
-    printTree(root);
+    // printTree(root);
+    printTreeLevelWise(root);
     cout << "Count = " << countNode(root) << endl;
+
+    // time_t start, end;
+    // time(&start);
+    // ios_base::sync_with_stdio(false);
+    cout << "Diameter = " << diameter(root) << endl;
+    // time(&end);
+
+    // time_t start2, end2;
+    // time(&start2);
+    // ios_base::sync_with_stdio(false);
+    cout << "Efficient Diameter = " << diameterHeight(root).first << endl;
+    // time(&end2);
+
+    // double time_taken = double(end - start);
+    // cout << "Time taken by program 1 is : " << fixed
+    //      << time_taken << setprecision(14);
+    // cout << " sec " << endl;
+
+    // double time_taken2 = double(end2 - start2);
+    // cout << "Time taken by program 2 is : " << fixed
+    //      << time_taken2 << setprecision(14);
+    // cout << " sec " << endl;
+
     cout << "### Pre-Order ###" << endl;
     preorder(root);
     cout << endl;
@@ -182,6 +261,5 @@ int main()
     cout << "### Post-Order ###" << endl;
     postorder(root);
     cout << endl;
-
     delete root;
 }

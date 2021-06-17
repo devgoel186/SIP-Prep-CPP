@@ -96,10 +96,54 @@ void printTree(Node<int> *root)
     printTree(root->right);
 }
 
+int countNode(Node<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    return countNode(root->left) + countNode(root->right) + 1;
+}
+
+void preorder(Node<int> *root)
+{
+    if (root == NULL)
+        return;
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void inorder(Node<int> *root)
+{
+    if (root == NULL)
+        return;
+    preorder(root->left);
+    cout << root->data << " ";
+    preorder(root->right);
+}
+
+void postorder(Node<int> *root)
+{
+    if (root == NULL)
+        return;
+    preorder(root->left);
+    preorder(root->right);
+    cout << root->data << " ";
+}
+
 int main()
 {
     // Node<int> *root = takeInput();
     Node<int> *root = levelWise();
     printTree(root);
+    cout << "Count = " << countNode(root) << endl;
+    cout << "### Pre-Order ###" << endl;
+    preorder(root);
+    cout << endl;
+    cout << "### In-Order ###" << endl;
+    inorder(root);
+    cout << endl;
+    cout << "### Post-Order ###" << endl;
+    postorder(root);
+    cout << endl;
     delete root;
 }

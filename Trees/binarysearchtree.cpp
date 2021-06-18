@@ -3,6 +3,7 @@
 #include <time.h>
 #include <algorithm>
 #include <iomanip>
+#include <climits>
 using namespace std;
 
 template <typename T>
@@ -136,14 +137,57 @@ Node<int> *searchNode(Node<int> *root, int data)
     return searchNode(root->left, data);
 }
 
+void printInRange(Node<int> *root, int low, int high)
+{
+    if (root == NULL)
+        return;
+    if (low < root->data)
+        printInRange(root->left, low, high);
+    if (low <= root->data && high >= root->data)
+        cout << root->data << " ";
+    if (high > root->data)
+        printInRange(root->right, low, high);
+}
+
+int maximumElement(Node<int> *root)
+{
+    if (root == NULL)
+        return INT_MIN;
+    return max({root->data, maximumElement(root->left), maximumElement(root->right)});
+}
+
+int minimumElement(Node<int> *root)
+{
+    if (root == NULL)
+        return INT_MAX;
+    return min({root->data, minimumElement(root->left), minimumElement(root->right)});
+}
+
+bool checkBST(Node<int> *root)
+{
+    if (root == NULL)
+        return true;
+    int leftMax = maximumElement(root->left);
+    int rightMin = minimumElement(root->right);
+    bool output = (root->data > leftMax) && (root->data <= rightMin) && checkBST(root->left) && checkBST(root->right);
+    return output;
+}
+
 int main()
 {
     Node<int> *root = levelWise();
+    cout << "Is BST? : ";
+    if (checkBST(root))
+        cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
     printTreeLevelWise(root);
     cout << "Enter element to search : " << endl;
     int search;
     cin >> search;
     Node<int> *found = searchNode(root, search);
     if (found != NULL)
-        cout << found->data << endl;
+        cout << "Found = " << found->data << endl;
+    printInRange(root, 1, 9);
+    // 5 3 7 1 4 6 9 -1 -1 -1 -1 -1 -1 8 10 -1 -1 -1 -1
 }

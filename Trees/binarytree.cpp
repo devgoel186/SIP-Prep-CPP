@@ -3,6 +3,7 @@
 #include <time.h>
 #include <algorithm>
 #include <iomanip>
+#include <vector>
 using namespace std;
 
 template <typename T>
@@ -222,6 +223,33 @@ pair<int, int> diameterHeight(Node<int> *root)
     return finalAns;
 }
 
+vector<int> *pathToNode(Node<int> *root, int data)
+{
+    if (root == NULL)
+        return NULL;
+    if (root->data == data)
+    {
+        vector<int> *output = new vector<int>();
+        output->push_back(root->data);
+        return output;
+    }
+
+    vector<int> *resultL = pathToNode(root->left, data);
+    if (resultL != NULL)
+    {
+        resultL->push_back(root->data);
+        return resultL;
+    }
+
+    vector<int> *resultR = pathToNode(root->right, data);
+    if (resultR != NULL)
+    {
+        resultR->push_back(root->data);
+        return resultR;
+    }
+    return NULL;
+}
+
 int main()
 {
     // Node<int> *root = takeInput();
@@ -264,5 +292,15 @@ int main()
     cout << "### Post-Order ###" << endl;
     postorder(root);
     cout << endl;
+    vector<int> *output = pathToNode(root, 7);
+    cout << "Path to Node 7" << endl;
+
+    for (int i = output->size() - 1; i >= 0; i--)
+    {
+        cout << output->at(i) << " ";
+    }
+    delete output;
+    cout << endl;
+
     delete root;
 }

@@ -16,14 +16,40 @@ struct Node
     Node(T data)
     {
         this->data = data;
-        left = NULL;
-        right = NULL;
+        this->left = NULL;
+        this->right = NULL;
     }
 
     ~Node()
     {
         delete left;
         delete right;
+    }
+};
+
+template <typename T>
+struct LLNode
+{
+    T data;
+    LLNode *next;
+
+    LLNode(T data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+template <typename T>
+struct LL
+{
+    LLNode<T> *head;
+    LLNode<T> *tail;
+
+    LL()
+    {
+        this->head = NULL;
+        this->tail = NULL;
     }
 };
 
@@ -207,13 +233,52 @@ bool isBST3(Node<int> *root, int min = INT_MIN, int max = INT_MAX)
     return leftState && rightState;
 }
 
-void constructBST(Node<int> *root)
+Node<int> *constructBST(int *arr, int si, int ei)
 {
+    if (si > ei)
+        return NULL;
+    int mid = (si + ei) / 2;
+    Node<int> *root = new Node<int>(arr[mid]);
+    root->left = constructBST(arr, si, mid - 1);
+    root->right = constructBST(arr, mid + 1, ei);
+    return root;
+}
+
+LL<int> *BSTToSortedLL(Node<int> *root)
+{
+    if (root == NULL)
+    {
+        LL<int> *temp = new LL<int>();
+        return temp;
+    }
+    LL<int> *lh = BSTToSortedLL(root->left);
+    LL<int> *rh = BSTToSortedLL(root->right);
+
+    LLNode<int> *rootNode = new LLNode<int>(root->data);
+
+    if (lh->tail != NULL)
+        lh->tail->next = rootNode;
+    rootNode->next = rh->head;
+
+    LL<int> *output = new LL<int>();
+    if (lh->head == NULL)
+        output->head = rootNode;
+    else
+        output->head = lh->head;
+
+    if (rh->tail == NULL)
+        output->tail = rootNode;
+    else
+        output->tail = rh->tail;
+
+    return output;
 }
 
 int main()
 {
-    Node<int> *root = levelWise();
+    // Node<int> *root = levelWise();
+    int arr[] = {1, 2, 3, 4, 5, 6, 7};
+    Node<int> *root = constructBST(arr, 0, 6);
     cout << "Is BST? : ";
     if (checkBSTOptimised(root).first)
         cout << "Yes" << endl;
@@ -225,6 +290,14 @@ int main()
             << "Yes" << endl;
     else
         cout << "No" << endl;
+    LL<int> *llPointer = BSTToSortedLL(root);
+    cout << "## BST To Linked List : ";
+    while (llPointer->head != NULL)
+    {
+        cout << llPointer->head->data << " ";
+        llPointer->head = llPointer->head->next;
+    }
+    cout << "##" << endl;
     printTreeLevelWise(root);
     cout << "Enter element to search : " << endl;
     int search;

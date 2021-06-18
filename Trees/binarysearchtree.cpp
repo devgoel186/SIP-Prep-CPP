@@ -163,6 +163,7 @@ int minimumElement(Node<int> *root)
     return min({root->data, minimumElement(root->left), minimumElement(root->right)});
 }
 
+// EFFICIENCY = O(N*H)
 bool checkBST(Node<int> *root)
 {
     if (root == NULL)
@@ -173,6 +174,7 @@ bool checkBST(Node<int> *root)
     return output;
 }
 
+// EFFICIENCY = O(N)
 pair<bool, pair<int, int>> checkBSTOptimised(Node<int> *root)
 {
     if (root == NULL)
@@ -194,12 +196,33 @@ pair<bool, pair<int, int>> checkBSTOptimised(Node<int> *root)
     return output;
 }
 
+bool isBST3(Node<int> *root, int min = INT_MIN, int max = INT_MAX)
+{
+    if (root == NULL)
+        return true;
+    if (root->data < min || root->data > max)
+        return false;
+    bool leftState = isBST3(root->left, min, root->data);
+    bool rightState = isBST3(root->right, root->data, max);
+    return leftState && rightState;
+}
+
+void constructBST(Node<int> *root)
+{
+}
+
 int main()
 {
     Node<int> *root = levelWise();
     cout << "Is BST? : ";
     if (checkBSTOptimised(root).first)
         cout << "Yes" << endl;
+    else
+        cout << "No" << endl;
+    cout << "Is BST3? : ";
+    if (isBST3(root))
+        cout
+            << "Yes" << endl;
     else
         cout << "No" << endl;
     printTreeLevelWise(root);

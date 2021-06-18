@@ -173,11 +173,32 @@ bool checkBST(Node<int> *root)
     return output;
 }
 
+pair<bool, pair<int, int>> checkBSTOptimised(Node<int> *root)
+{
+    if (root == NULL)
+    {
+        return pair<bool, pair<int, int>>(true, make_pair(INT_MAX, INT_MIN));
+    }
+    pair<bool, pair<int, int>> leftState = checkBSTOptimised(root->left);
+    pair<bool, pair<int, int>> rightState = checkBSTOptimised(root->right);
+    pair<bool, pair<int, int>> output;
+
+    bool con1 = (root->data > leftState.second.second);
+    bool con2 = (root->data < rightState.second.first);
+    bool result = leftState.first && rightState.first && con1 && con2;
+
+    int maxEle = max({root->data, leftState.second.second, rightState.second.second});
+    int minEle = min({root->data, leftState.second.first, rightState.second.first});
+
+    output = make_pair(result, make_pair(minEle, maxEle));
+    return output;
+}
+
 int main()
 {
     Node<int> *root = levelWise();
     cout << "Is BST? : ";
-    if (checkBST(root))
+    if (checkBSTOptimised(root).first)
         cout << "Yes" << endl;
     else
         cout << "No" << endl;

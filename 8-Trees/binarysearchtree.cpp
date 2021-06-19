@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <climits>
+#include "./bstclass.h"
 using namespace std;
 
 template <typename T>
@@ -277,34 +278,47 @@ LL<int> *BSTToSortedLL(Node<int> *root)
 int main()
 {
     // Node<int> *root = levelWise();
-    int arr[] = {1, 2, 3, 4, 5, 6, 7};
-    Node<int> *root = constructBST(arr, 0, 6);
-    cout << "Is BST? : ";
-    if (checkBSTOptimised(root).first)
-        cout << "Yes" << endl;
-    else
-        cout << "No" << endl;
-    cout << "Is BST3? : ";
-    if (isBST3(root))
-        cout
-            << "Yes" << endl;
-    else
-        cout << "No" << endl;
-    LL<int> *llPointer = BSTToSortedLL(root);
-    cout << "## BST To Linked List : ";
-    while (llPointer->head != NULL)
-    {
-        cout << llPointer->head->data << " ";
-        llPointer->head = llPointer->head->next;
-    }
-    cout << "##" << endl;
-    printTreeLevelWise(root);
-    cout << "Enter element to search : " << endl;
-    int search;
-    cin >> search;
-    Node<int> *found = searchNode(root, search);
-    if (found != NULL)
-        cout << "Found = " << found->data << endl;
-    printInRange(root, 1, 9);
+    // int arr[] = {1, 2, 3, 4, 5, 6, 7};
+    // Node<int> *root = constructBST(arr, 0, 6);
+    // cout << "Is BST? : ";
+    // if (checkBSTOptimised(root).first)
+    //     cout << "Yes" << endl;
+    // else
+    //     cout << "No" << endl;
+    // cout << "Is BST3? : ";
+    // if (isBST3(root))
+    //     cout
+    //         << "Yes" << endl;
+    // else
+    //     cout << "No" << endl;
+    // LL<int> *llPointer = BSTToSortedLL(root);
+    // cout << "## BST To Linked List : ";
+    // while (llPointer->head != NULL)
+    // {
+    //     cout << llPointer->head->data << " ";
+    //     llPointer->head = llPointer->head->next;
+    // }
+    // cout << "##" << endl;
+    // printTreeLevelWise(root);
+    // cout << "Enter element to search : " << endl;
+    // int search;
+    // cin >> search;
+    // Node<int> *found = searchNode(root, search);
+    // if (found != NULL)
+    //     cout << "Found = " << found->data << endl;
+    // printInRange(root, 1, 9);
+
+    BST<int> b;
+    b.insertData(10);
+    b.insertData(5);
+    b.insertData(20);
+    b.insertData(7);
+    b.insertData(3);
+    b.insertData(15);
+    b.printTree();
+    b.deleteData(10);
+    b.deleteData(100);
+    b.printTree();
+
     // 5 3 7 1 4 6 9 -1 -1 -1 -1 -1 -1 8 10 -1 -1 -1 -1
 }

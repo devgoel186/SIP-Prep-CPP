@@ -19,6 +19,7 @@ private:
         return true;
     }
 
+    // EFFICIENCY = O(H)
     BSTNode<int> *insertData(int data, BSTNode<int> *root)
     {
         if (root == NULL)
@@ -33,6 +34,7 @@ private:
         return root;
     }
 
+    // EFFICIENCY = O(H)
     BSTNode<int> *deleteData(int data, BSTNode<int> *root)
     {
         if (root == NULL)

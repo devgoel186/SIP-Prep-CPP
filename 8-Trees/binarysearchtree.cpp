@@ -150,6 +150,7 @@ void printTreeLevelWise(Node<int> *root)
     }
 }
 
+// EFFICIENCY = O(H)
 Node<int> *searchNode(Node<int> *root, int data)
 {
     if (root == NULL)

@@ -1,3 +1,5 @@
+# TREES
+
 **Depth of x** - No. of edges in path from root to x
 
 **Height of x** - No. of edges in path from x to a leaf
@@ -6,7 +8,7 @@
 
 **Binary tree** - A tree in which each node can have at least 2 children
 
-**Strict/proper binary tree** - Every node other than the leaf nodes has 2 children
+**Strict/proper/full binary tree** - Every node other than the leaf nodes has 2 children
 
 **Complete binary tree** - All levels except possibly last level are completely filled and all nodes are as left as possible. Max nodes at level i = 2^i
 

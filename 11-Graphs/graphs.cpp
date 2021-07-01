@@ -112,6 +112,10 @@ bool hasPath(int **edges, int n, int sv, int ev)
     return res;
 }
 
+void getPath()
+{
+}
+
 void deleteMemory(int **edges, int n)
 {
     for (int i = 0; i < n; i++)

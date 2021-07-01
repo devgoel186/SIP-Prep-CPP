@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <vector>
 using namespace std;
 
 void printDFS(int **edges, int n, int sv, bool *visited)
@@ -112,8 +113,48 @@ bool hasPath(int **edges, int n, int sv, int ev)
     return res;
 }
 
-void getPath()
+vector<int> *getPathDFSHelper(int **edges, int n, int sv, int ev, bool *visited)
 {
+    visited[sv] = true;
+    vector<int> *res = new vector<int>;
+    if (sv == ev)
+    {
+        res->push_back(sv);
+        return res;
+    }
+
+    res = NULL;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (i == sv)
+            continue;
+        if (edges[sv][i] == 1)
+        {
+            if (visited[i])
+                continue;
+            vector<int> *temp = getPathDFSHelper(edges, n, i, ev, visited);
+            if (temp != NULL)
+            {
+                temp->push_back(sv);
+                return temp;
+            }
+        }
+    }
+
+    return res;
+}
+
+vector<int> *getPathDFS(int **edges, int n, int sv, int ev)
+{
+    bool *visited = new bool[n];
+    for (int i = 0; i < n; i++)
+    {
+        visited[i] = false;
+    }
+    vector<int> *res = getPathDFSHelper(edges, n, sv, ev, visited);
+    delete[] visited;
+    return res;
 }
 
 void deleteMemory(int **edges, int n)
@@ -157,6 +198,14 @@ int main()
     cout << endl;
 
     cout << "Has Path ? = " << hasPath(edges, n, 0, 2) << endl;
+
+    cout << "Get Path ? = " << endl;
+    vector<int> *output = getPathDFS(edges, n, 0, 2);
+    for (auto it = output->rbegin(); it != output->rend(); it++)
+    {
+        cout << *it << " ";
+    }
+    cout << endl;
 
     deleteMemory(edges, n);
 }

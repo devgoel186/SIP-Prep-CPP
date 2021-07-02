@@ -157,6 +157,42 @@ vector<int> *getPathDFS(int **edges, int n, int sv, int ev)
     return res;
 }
 
+// bool isConnectedHelper(int **edges, int n, int sv, bool *visited)
+// {
+//     visited[sv] = true;
+//     bool res = false;
+
+//     if (sv == ev)
+//         return true;
+
+//     for (int i = 0; i < n; i++)
+//     {
+//         if (i == sv)
+//             continue;
+//         if (edges[sv][i] == 1)
+//         {
+//             if (visited[i])
+//                 continue;
+//             res = hasPathHelper(edges, n, i, ev, visited);
+//             if (res)
+//                 return res;
+//         }
+//     }
+//     return res;
+// }
+
+// bool isConnected(int **edges, int n)
+// {
+//     bool *visited = new bool[n];
+//     for (int i = 0; i < n; i++)
+//     {
+//         visited[i] = false;
+//     }
+//     bool res = isConnectedHelper(edges, n, 0, visited);
+//     delete[] visited;
+//     return res;
+// }
+
 void deleteMemory(int **edges, int n)
 {
     for (int i = 0; i < n; i++)

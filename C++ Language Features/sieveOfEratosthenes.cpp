@@ -24,6 +24,8 @@ void sieveLogic(int n)
     cout << endl;
 }
 
+/* Complexity = O(n log(log n))) */
+
 int main()
 {
     int n;

@@ -1,4 +1,4 @@
-// Spanning tree is a tree which is made up of all vertices in a graph
+// Spanning tree is a tree which is made up of all vertices in a graph whose weight sum is minimum
 
 // Kruskal's Algorithm - Total Vertices - N ; Total Edges in MST - N - 1
 // Complexity = Sorting Input (O(nlogn)) + Cycle Detection (O(EV))

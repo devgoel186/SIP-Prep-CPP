@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+/* Bubble through the array every loop, which will automatically put the maximum number on the last element(ascending sort) */
 void bubbleSort(int *arr, int n)
 {
     for (int i = 0; i < n - 1; i++)
@@ -13,6 +14,7 @@ void bubbleSort(int *arr, int n)
     }
 }
 
+/* Selects the smallest element, and puts at start (ascending sort)*/
 void selectionSort(int *arr, int n)
 {
     for (int i = 0; i < n - 1; i++)
@@ -27,6 +29,10 @@ void selectionSort(int *arr, int n)
         }
         swap(arr[i], arr[pos]);
     }
+}
+
+void insertionSort(int *arr, int n)
+{
 }
 
 void print(int *arr, int n)

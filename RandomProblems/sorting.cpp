@@ -36,6 +36,7 @@ void insertionSort(int *arr, int n)
 {
 }
 
+/* Merge step takes O(n) */
 void merge(vector<int> *arr, int l, int mid, int r)
 {
     int i = l;
@@ -75,6 +76,7 @@ void merge(vector<int> *arr, int l, int mid, int r)
     delete res;
 }
 
+/* COMPLEXITY = O(nlogn) - Average */
 void mergeSort(vector<int> *arr, int l, int r)
 {
     if (l < r)

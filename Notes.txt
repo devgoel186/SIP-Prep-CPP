@@ -1,0 +1,25 @@
+Preprocessors -  In C++,  all lines that start with pound (#) sign are called directives and are processed by preprocessor which is a program invoked by the compiler.
+
+#######
+
+Q. Is it fine to write “void main()” or “main()” in C/C++?
+Ans - 
+No. A conforming implementation accepts : 
+
+1. int main()
+   { /* ... */ }
+
+2. int main(int argc, char* argv[])
+   { /* ... */ }
+
+Even if your compiler accepts “void main()” avoid it, or risk being considered ignorant by C and C++ programmers. 
+You can even specify main() without any return type like :
+
+#include <iostream> 
+main()
+{ /* ... */}
+
+If you write the whole error-free main() function without return statement at the end then compiler automatically add return statement with proper datatype at the end of the program.
+
+#######
+

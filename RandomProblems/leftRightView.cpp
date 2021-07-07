@@ -69,10 +69,10 @@ int main()
     Node *root = new Node(2);
     root->left = new Node(3);
     root->right = new Node(5);
-    // root->left->left = new Node(12);
-    // root->left->right = new Node(11);
+    root->left->left = new Node(12);
+    root->left->right = new Node(11);
     root->right->left = new Node(8);
-    // root->right->right = new Node(4);
+    root->right->right = new Node(4);
 
     // 2 3 5 12 11 8 4 - BFS Traversal
 

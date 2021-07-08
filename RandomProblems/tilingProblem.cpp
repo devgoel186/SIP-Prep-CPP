@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define long long ll;
+#define ll long long
 
 int tiling(int n)
 {

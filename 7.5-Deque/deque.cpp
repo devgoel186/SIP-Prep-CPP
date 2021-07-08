@@ -1,7 +1,7 @@
 #include <iostream>
 #include <deque>
 using namespace std;
-#define long long ll;
+#define ll long long
 
 int main()
 {

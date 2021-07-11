@@ -2,11 +2,15 @@
 
 SIP Prep for DSA. May include DBMS later on.
 
+![Data Structures Operations](./AllDataStructuresOperations.png)
+
 ## POINTERS
 
 ## DYNAMIC ALLOCATION (STACK AND HEAP MEMORY)
 
 ## RECURSION (PROBLEMS INCLUDED)
+
+## ARRAYS
 
 ## LINKED LISTS (RECURSIVE + NON-RECURSIVE)
 

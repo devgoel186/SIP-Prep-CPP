@@ -4,6 +4,8 @@ SIP Prep for DSA. May include DBMS later on.
 
 ![Data Structures Operations](./AllDataStructuresOperations.png)
 
+![Adjaceny Matrix vs Adjacency List](.AdjacencyMatrixVSAdjacencyList.png)
+
 ## POINTERS
 
 ## DYNAMIC ALLOCATION (STACK AND HEAP MEMORY)

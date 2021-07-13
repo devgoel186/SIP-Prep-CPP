@@ -13,7 +13,7 @@ int main()
         for (int j = 1; j <= i; j++)
         {
             cout << temp << " ";
-            temp *= (i - j) / j;
+            temp = temp * (i - j) / j;
         }
         cout << endl;
     }

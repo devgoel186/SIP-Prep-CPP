@@ -4,7 +4,7 @@ SIP Prep for DSA. May include DBMS later on.
 
 ![Data Structures Operations](./AllDataStructuresOperations.png)
 
-![Adjaceny Matrix vs Adjacency List](.AdjacencyMatrixVSAdjacencyList.png)
+![Adjaceny Matrix vs Adjacency List](./AdjacencyMatrixVSAdjacencyList.png)
 
 ## POINTERS
 

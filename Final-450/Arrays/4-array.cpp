@@ -3,6 +3,7 @@ using namespace std;
 #define ll long long
 
 /* Complexity = O(n) */
+/* Requires only one array traversal */
 
 int main()
 {

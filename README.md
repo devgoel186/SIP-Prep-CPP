@@ -23,3 +23,5 @@ SIP Prep for DSA. May include DBMS later on.
 ## STACKS (ARRAY + LL IMPLEMENTATION)
 
 ## TREES (NORMAL + BINARY + BINARY SEARCH TREES)
+
+Backlog = Red-Black Trees + AVL Trees

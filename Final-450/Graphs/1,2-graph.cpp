@@ -36,7 +36,7 @@ int main()
     {
         cin >> x >> y;
         adjl[x].push_back(y);
-        adjl[y].push_back(x);
+        // adjl[y].push_back(x);
     }
 
     for (int i = 0; i < n; i++)

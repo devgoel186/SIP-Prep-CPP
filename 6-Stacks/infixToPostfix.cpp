@@ -5,11 +5,11 @@ using namespace std;
 int precedence(char s)
 {
     if (s == '^')
-        return 1;
-    if (s == '*' || s == '/')
+        return 3;
+    else if (s == '*' || s == '/')
         return 2;
     else if (s == '+' || s == '-')
-        return 3;
+        return 1;
     return -1;
 }
 
@@ -20,7 +20,7 @@ int main()
     stack<char> st;
     for (int i = 0; i < s.length(); i++)
     {
-        if (s[i] >= '0' && s[i] <= '9')
+        if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
             cout << s[i];
         else
         {
@@ -38,7 +38,7 @@ int main()
             }
             else
             {
-                while (!st.empty() && (precedence(s[i]) < precedence(st.top())))
+                while (!st.empty() && (precedence(s[i]) <= precedence(st.top())))
                 {
                     cout << st.top();
                     st.pop();

@@ -4,6 +4,11 @@ using namespace std;
 #define MOD 1000000007
 #define MAX INT_MAX
 
+/*
+COMPLEXITY = O(m * n)
+SPACE COMPLEXITY = O(n)
+*/
+
 int main()
 {
     int n; /* n is the value to achieve */

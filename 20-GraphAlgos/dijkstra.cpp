@@ -8,11 +8,11 @@ vector<int> dijkstraBFS(vector<vector<pair<int, int>>> graph, int src)
 {
     vector<int> distance(graph.size(), INT_MAX);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    pq.push({src, 0});
+    pq.push({0, src});
     distance[src] = 0;
     while (!pq.empty())
     {
-        int u = pq.top().first;
+        int u = pq.top().second;
         pq.pop();
 
         for (auto i : graph[u])
@@ -23,7 +23,7 @@ vector<int> dijkstraBFS(vector<vector<pair<int, int>>> graph, int src)
             if (distance[v] > distance[u] + w)
             {
                 distance[v] = distance[u] + w;
-                pq.push({v, distance[v]});
+                pq.push({distance[v], v});
             }
         }
     }

@@ -11,7 +11,7 @@ ll calculate_hash(string s, vector<int> &powers)
     {
         hash = (hash % MOD + ((s[i] - 'a' + 1) * powers[i]) % MOD) % MOD;
     }
-    return hash;
+    return hash % MOD;
 }
 
 int main()
@@ -22,9 +22,7 @@ int main()
     vector<int> powers(n);
     powers[0] = 1;
     for (int i = 1; i < n; i++)
-    {
         powers[i] = (powers[i - 1] * p) % MOD;
-    }
 
     vector<string> strings = {"aa",
                               "ab",
@@ -33,10 +31,15 @@ int main()
                               "cc",
                               "aa"};
     vector<ll> hashes;
+
     for (auto w : strings)
     {
         hashes.push_back(calculate_hash(w, powers));
     }
+
+    /* If we sort strings normally = O(nmlog(n)), where m is maximum size of string */
+    /* By string hashing, we are sorting integers, thus O(nlog(n)) */
+
     sort(hashes.begin(), hashes.end());
     int distinct = 0;
     for (int i = 0; i < hashes.size(); i++)
@@ -45,5 +48,5 @@ int main()
             distinct++;
     }
 
-    cout << "Distinct substrings = " <<  distinct << endl;
+    cout << "Distinct substrings = " << distinct << endl;
 }

@@ -57,14 +57,4 @@ int main()
         else
             break;
     }
-
-    cout << "Tree = ";
-    for (int i = 1; i <= 15; i++)
-        cout << tree[i] << " ";
-
-    /* Sample Tree */
-    /* 
-    8
-    5 3 2 4 1 8 6 10
-    */
 }

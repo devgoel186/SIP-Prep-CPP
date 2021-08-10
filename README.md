@@ -8,6 +8,8 @@ SIP Prep for DSA. May include DBMS later on.
 
 ![Heap Complexities](./HeapComplexities.png)
 
+![Sorting Algorithms Complexities](./SortingComplexities.png)
+
 ## POINTERS
 
 ## DYNAMIC ALLOCATION (STACK AND HEAP MEMORY)

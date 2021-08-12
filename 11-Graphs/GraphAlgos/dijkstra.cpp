@@ -1,15 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define INF INT_MAX
+#define MOD 1000000007
+#define MAX INT_MAX
+
+vector<int> dijkstra(vector<vector<pair<int, int>>> &graph, int src)
+{
+    int n = graph.size();
+    vector<int> dist(n, INT_MAX);
+    dist[src] = 0;
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, src});
+
+    while (!pq.empty())
+    {
+        pair<int, int> top = pq.top();
+        int u = top.second;
+        pq.pop();
+
+        for (auto i : graph[u])
+        {
+            int v = i.first;
+            int w = i.second;
+            if (dist[v] > dist[u] + w)
+            {
+                dist[v] = dist[u] + w;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    return dist;
+}
 
 int main()
 {
     int n, e;
     cin >> n >> e;
     vector<vector<pair<int, int>>> adjl(n);
-    vector<bool> visited(n, false);
-    vector<int> distance(n, INF);
 
     for (int i = 0; i < e; i++)
     {
@@ -19,32 +48,13 @@ int main()
         adjl[v].push_back({u, w});
     }
 
-    int source;
-    cin >> source;
-    distance[source] = 0;
+    int src;
+    cin >> src;
 
-    set<pair<int, int>> s;
-    s.insert({0, source});
-    while (!s.empty())
-    {
-        pair<int, int> x = *(s.begin());
-        s.erase(x);
-        for (auto it : adjl[x.second])
-        {
-            if (distance[it.first] > distance[x.second] + it.second)
-            {
-                s.erase({distance[it.first], it.first});
-                distance[it.first] = distance[x.second] + it.second;
-                s.insert({distance[it.first], it.first});
-            }
-        }
-    }
+    vector<int> sssp = dijkstra(adjl, src);
 
-    for (auto it : distance)
+    for (int i = 0; i < n; i++)
     {
-        if (it == INF)
-            cout << "INF ";
-        else
-            cout << it << " ";
+        cout << i << " -> " << sssp[i] << endl;
     }
 }

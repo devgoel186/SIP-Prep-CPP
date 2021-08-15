@@ -4,7 +4,7 @@ using namespace std;
 #define MOD 1000000007
 #define MAX INT_MAX
 
-void dfs(vector<vector<int>> &adjl, vector<int> &visited, int src)
+void dfs(vector<vector<int>> &adjl, vector<bool> &visited, int src)
 {
     visited[src] = true;
     cout << src << " ";
@@ -21,7 +21,7 @@ int main()
     int n, e;
     cin >> n >> e;
     vector<vector<int>> adjl(n);
-    vector<int> visited(n, false);
+    vector<bool> visited(n, false);
 
     for (int i = 0; i < e; i++)
     {

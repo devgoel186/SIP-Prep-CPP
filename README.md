@@ -28,6 +28,4 @@ SIP Prep for DSA. May include DBMS later on.
 
 ## TREES (NORMAL + BINARY + BINARY SEARCH TREES)
 
-Backlog = Red-Black Trees + AVL Trees
-
 ## GRAPHS

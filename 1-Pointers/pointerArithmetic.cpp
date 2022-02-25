@@ -8,4 +8,6 @@ int main()
 
     cout << p << endl;
     p += 2;
+
+    cout << *p << endl; // garbage value
 }

@@ -14,4 +14,6 @@ int main()
 
     i++;
     cout << i << endl;
+    p++;
+    cout << *p << endl;
 }
